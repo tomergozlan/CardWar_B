@@ -9,72 +9,84 @@
 #include <ctime>
 #include "card.hpp"
 #include "deck.hpp"
-
+#include <chrono>
+#include <algorithm>
+#include <random>
 using namespace std;
-using namespace ariel;
+namespace ariel{
 
 /// swap function card objects by reference using for shuffle cards.
-    void Deck::swap(Card &card1, Card &card2) {
-        Card temp = card1;
-        card1 = card2;
-        card2 = temp;
-    }
-    /// Creating a deck of cards consisting of 13 cards of each suit for a total of 52 (unmixed).
-    Deck::Deck() {
-        vector<Card> vector_deck;
-        for (Suit suit : {diamonds , hearts , spades , clubs}) {
-            for (int value = 1; value <= 13; value++) {
-                vector_deck.push_back(Card(value,suit));
-            }
+void Deck::swap(Card &card1, Card &card2) {
+    Card temp = card1;
+    card1 = card2;
+    card2 = temp;
+}
+
+/// Creating a deck of cards consisting of 13 cards of each suit for a total of 52 (unmixed).
+Deck::Deck() {
+    vector <Card> vector_deck;
+    for (int suit = 0; suit <= 3; suit++) {
+        for (int value =2; value <= 14; value++) {
+            vector_deck.push_back(ariel::Card(ariel::Value(value), ariel::Suit(suit)));
         }
-        /// shuffle the deck.
-        for (int i = vector_deck.size()-1; i > 0; i--) {
-            int j = rand() % (i + 1);
-                swap(vector_deck[i], vector_deck[j]);
-            }
+    }
+    /// shuffle the deck.
+        auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+        std::mt19937 g(static_cast<unsigned int>(seed));
+        std::shuffle(vector_deck.begin(), vector_deck.end(), g);
+
+
         /// Make the deck using queue as data structure.
-        for (int i = 0; i < vector_deck.size(); i++) {
+        for (std::vector<Card>::size_type i = 0; i < vector_deck.size(); i++) {
             deck.push(vector_deck[i]);
-          }
-        }
-        /// create deck from queue of card
-        Deck::Deck(queue<Card> cards){
-        this->deck = cards;
-    }
-    /// drawing a card from the top of the deck and returns its value.
-    Card Deck::getTopCard() {
-        Card card = deck.front();
-        deck.pop();
-        return card;
-    }
-    /// Return the size of the rest of the deck.
-     int Deck::size() {
-        return (int) deck.size();
-    }
-    /// add card to the end of the deck
-    void Deck::addCard(Card card){
-        deck.push(card);
-    }
-    /// A union between two queues simulates that one of the players won the war
-    void Deck::addToWinner(Deck& deck,Deck& winning_deck){
-        while (winning_deck.size() != 0) {
-            deck.addCard(winning_deck.getTopCard());
         }
     }
-    /// shuffle the deck
-    void Deck::shuffle () {
-        vector<Card> queue_to_vector;
+
+/// create deck from queue of card
+Deck::Deck(queue <Card> cards) {
+    this->deck = cards;
+}
+
+/// drawing a card from the top of the deck and returns its value.
+Card Deck::getTopCard() {
+    Card card = deck.front();
+    deck.pop();
+    return card;
+}
+
+/// Return the size of the rest of the deck.
+int Deck::size() {
+    return (int) deck.size();
+}
+
+/// add card to the end of the deck
+void Deck::addCard(Card card) {
+    deck.push(card);
+}
+
+/// A union between two queues simulates that one of the players won the war
+void Deck::addToWinner(Deck &winning_deck) {
+    while (winning_deck.size() != 0) {
+        deck.push(winning_deck.getTopCard());
+    }
+}
+
+/// shuffle the deck
+    void Deck::shuffle(Deck &deck1) {
+        vector <Card> queue_to_vector;
         while (!this->deck.empty()) {
             queue_to_vector.push_back(this->deck.front());
             deck.pop();
         }
-        shuffle(queue_to_vector.begin(), queue_to_vector.end(), default_random_engine(time(NULL)));
-        for (Card& card : queue_to_vector) {
+        unsigned seed = static_cast<unsigned>(time(NULL));
+        std::shuffle(queue_to_vector.begin(), queue_to_vector.end(), std::default_random_engine(seed));
+        for (Card &card: queue_to_vector) {
             deck.push(card);
         }
     }
 /// Reset deck of player
-void Deck::resetDeck(){
-     queue<Card> emptyDeck;
-    this->deck=emptyDeck;
+    void Deck::resetDeck() {
+        queue<Card> empty_queue;
+        std::swap(empty_queue, deck);
     }
+}

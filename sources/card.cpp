@@ -3,7 +3,10 @@
 #include "card.hpp"
 
 using namespace std;
-using namespace ariel;
+namespace ariel{
+
+    /// Method number 1 : The constructor for the Card class.
+    Card::Card(ariel::Value value, ariel::Suit suit) {}
 
 /// The getter function that returns the suit field.
 Suit Card::getSuit() {
@@ -58,4 +61,5 @@ string Card::name() {
 /// Prints a string representation of the current Card
 void Card::printCard(){
     std::cout<<this->name();
+}
 }

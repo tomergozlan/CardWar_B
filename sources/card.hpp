@@ -18,7 +18,7 @@ enum Value {two=2, three, four, five, six, seven, eight, nine, ten, jack, queen,
         Value value;
     public:
         /// Method number 1 : The constructor for the Card class.
-        Card(Value value,Suit suit):suit(suit), value(value) {}
+        Card(Value value,Suit suit);
         /// Method number 2 : The getter function that returns the suit field.
         Suit getSuit();
         /// Method number 3 : The getter function that returns the value field.

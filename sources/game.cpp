@@ -5,19 +5,11 @@
 #include <string>
 
 using namespace std;
-using namespace ariel;
+namespace ariel{
 
 /// Safe constructor of the class game.
-Game::Game(Player player1, Player player2) throw(std::invalid_argument) {
-    if (player1.getName() == player2.getName()) {
-        throw std::invalid_argument("Error: Both players cannot have the same name.");
-    }
-    if (player1.getName().empty() || player2.getName().empty()) {
-        throw std::invalid_argument("Error: Player names cannot be empty.");
-    }
-    if (player1 == player2) {
-        throw std::invalid_argument("Error: Both players cannot be the same object.");
-    } else {
+Game::Game(Player player1, Player player2) noexcept(false):player1(player1), player2(player2)
+ {
         this->player1 = player1;
         this->player2 = player2;
         Deck deck = Deck();
@@ -27,13 +19,12 @@ Game::Game(Player player1, Player player2) throw(std::invalid_argument) {
         this->gameOver= false;
         this->round_number=0;
     }
-}
 
 void Game::splitDeck(Player &player1,Player &player2) {
-    Deck mainDeck = player1.getDeck();
-    mainDeck.shuffle();
-    player1.setDeck(player1.getDeck().resetDeck());
-    player2.setDeck(player2.getDeck().resetDeck());
+    ariel::Deck mainDeck = player1.getDeck();
+    mainDeck.shuffle(mainDeck);
+    player1.getDeck().resetDeck();
+    player2.getDeck().resetDeck();
     if (mainDeck.size() != 52) {
         throw runtime_error("Invalid number of cards.");
     }
@@ -58,6 +49,15 @@ void Game::drawSplit(Deck& deck){
     }
 }
 void Game::playTurn() {
+    if (player1.getName() == player2.getName()) {
+        throw std::invalid_argument("Error: Both players cannot have the same name.");
+    }
+    if (player1.getName().empty() || player2.getName().empty()) {
+        throw std::invalid_argument("Error: Player names cannot be empty.");
+    }
+    if (player1 == player2) {
+        throw std::invalid_argument("Error: Both players cannot be the same object.");
+    }
     while (!gameOver) {
         string stats = "";
         if (!deckSplit) {
@@ -113,8 +113,8 @@ void Game::playTurn() {
                 stats = player1.getName() + " played " + p1_card.name() + player2.getName() + " played " +
                         p2_card.name() + ". " + player1.getName() + " wins";
                 log.push(stats);
-                player1.setWonCard(player1.getWonCard().addCard(p1_card));
-                player1.setWonCard(player1.getWonCard().addCard(p2_card));
+                player1.getWonCard().addCard(p1_card);
+                player1.getWonCard().addCard(p2_card);
                 player1.winIncrement();
                 player2.loseIncrement();
                 break;
@@ -123,8 +123,8 @@ void Game::playTurn() {
                 stats = player1.getName() + " played " + p1_card.name() + player2.getName() + " played " +
                         p2_card.name() + ". " + player2.getName() + " wins";
                 log.push(stats);
-                player2.setWonCard(player2.getWonCard().addCard(p1_card));
-                player2.setWonCard(player2.getWonCard().addCard(p2_card));
+                player2.getWonCard().addCard(p1_card);
+               player2.getWonCard().addCard(p2_card);
                 player2.winIncrement();
                 player1.loseIncrement();
                 break;
