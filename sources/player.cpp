@@ -9,11 +9,15 @@ namespace ariel{
 
 /// Constructor of the class player.
 Player::Player(std::string name) {
+    if (name.empty()) {
+        throw runtime_error("Invalid Player name");
+    }
     this->name = name;
     this->deck = Deck(queue<Card>());
     this->wonCard = Deck(queue<Card>());
     this->win_number = 0;
     this->draw_number = 0;
+    this->lose_number=0;
 }
 
 /// Overloaded operator function for the equality operator ==.

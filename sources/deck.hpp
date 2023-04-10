@@ -36,7 +36,7 @@ namespace ariel {
         /// Method number 7 : A union between two queues simulates that one of the players won the war
         void addToWinner(Deck &winning_deck);
         /// Method number 8 : shuffle the deck
-        void shuffle(Deck &deck1);
+        void shuffle();
         /// Method number 9 : Reset deck of player
         void resetDeck();
     };

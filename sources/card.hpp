@@ -24,15 +24,19 @@ enum Value {two=2, three, four, five, six, seven, eight, nine, ten, jack, queen,
         /// Method number 3 : The getter function that returns the value field.
         Value getValue();
         /// Method number 4 : Return the string of enum that representation the card suit
-        static string getSuitName(Suit card_suit);
+        string getSuitName(Suit card_suit);
         /// Method number 5 : Return the string of enum representation the card value
-        static string getValueName(Value card_value);
+        string getValueName(Value card_value);
         /// Method number 6 : Function that takes another Card object as a parameter and compares it to the current Card object
         int compare(Card& other);
         /// Method number 7 : Returns a string representation of the current Card.
         string name();
         /// Method number 8 : Prints a string representation of the current Card
         void printCard();
+
+        void setValueCard(Value value1);
+        void setSuitCard(Suit suit1);
+
 
     };
 }

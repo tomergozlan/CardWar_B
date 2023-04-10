@@ -9,7 +9,6 @@
 #include "deck.hpp"
 
 using namespace std;
-class Deck;
 
 /// By placing these classes within the ariel namespace, the code ensures that they will have
 /// unique names and that they will not conflict with other code that uses the same names.

@@ -6,7 +6,10 @@ using namespace std;
 namespace ariel{
 
     /// Method number 1 : The constructor for the Card class.
-    Card::Card(ariel::Value value, ariel::Suit suit) {}
+    Card::Card(ariel::Value value, ariel::Suit suit) {
+        this->value=value;
+        this->suit=suit;
+    }
 
 /// The getter function that returns the suit field.
 Suit Card::getSuit() {
@@ -56,10 +59,16 @@ int Card::compare(Card &other){
 }
 /// Returns a string representation of the current Card.
 string Card::name() {
-    return this->getValueName(value) + " of " + this->getSuitName(suit);
+    return this->getValueName(this->getValue()) + " of " + this->getSuitName(this->getSuit())+ " ";
 }
 /// Prints a string representation of the current Card
 void Card::printCard(){
     std::cout<<this->name();
 }
+    void Card::setValueCard(Value value1){
+        value=value1;
+    }
+    void Card::setSuitCard(Suit suit1){
+        suit=suit1;
+    }
 }

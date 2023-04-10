@@ -49,7 +49,10 @@ Deck::Deck(queue <Card> cards) {
 
 /// drawing a card from the top of the deck and returns its value.
 Card Deck::getTopCard() {
-    Card card = deck.front();
+    if(this->deck.empty()) {
+        throw runtime_error("Error ! The queue is empty");
+    }
+    Card card = this->deck.front();
     deck.pop();
     return card;
 }
@@ -72,7 +75,7 @@ void Deck::addToWinner(Deck &winning_deck) {
 }
 
 /// shuffle the deck
-    void Deck::shuffle(Deck &deck1) {
+    void Deck::shuffle() {
         vector <Card> queue_to_vector;
         while (!this->deck.empty()) {
             queue_to_vector.push_back(this->deck.front());

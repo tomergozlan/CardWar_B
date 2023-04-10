@@ -23,7 +23,7 @@ namespace ariel {
         int round_number;
     public:
         Game(Player player1,Player player2); /// A constructor of the class.
-        void splitDeck(Player& player1,Player& player2); /// Split the deck of 2 players - 26 to each
+        void splitDeck(Deck& deck); /// Split the deck of 2 players - 26 to each
         void drawSplit(Deck& deck);/// split the deck in case of draw;
         void playTurn();/// Simulates a single turn in the game.
         void printLastTurn();/// Print the last turn stats.

@@ -10,29 +10,25 @@ namespace ariel{
 /// Safe constructor of the class game.
 Game::Game(Player player1, Player player2) noexcept(false):player1(player1), player2(player2)
  {
-        this->player1 = player1;
-        this->player2 = player2;
-        Deck deck = Deck();
-        player1.setDeck(deck);
-        this->deckSplit= false;
-        splitDeck(player1,player2);
-        this->gameOver= false;
-        this->round_number=0;
-    }
+    Deck mainDeck = Deck();
+     this->deckSplit= false;
+     splitDeck(mainDeck);
+     this->gameOver= false;
+     this->round_number=0;
+ }
 
-void Game::splitDeck(Player &player1,Player &player2) {
-    ariel::Deck mainDeck = player1.getDeck();
-    mainDeck.shuffle(mainDeck);
-    player1.getDeck().resetDeck();
-    player2.getDeck().resetDeck();
-    if (mainDeck.size() != 52) {
+void Game::splitDeck(Deck& deck) {
+    deck.shuffle();
+    this->player1.getDeck().resetDeck();
+    this->player2.getDeck().resetDeck();
+    if (deck.size() != 52) {
         throw runtime_error("Invalid number of cards.");
     }
     for (int i = 0; i < 26; i++) {
-        Card card1 = mainDeck.getTopCard();
-        Card card2 = mainDeck.getTopCard();
-        player1.getDeck().addCard(card1);
-        player2.getDeck().addCard(card2);
+        Card card1 = deck.getTopCard();
+        Card card2 = deck.getTopCard();
+        this->player1.getDeck().addCard(card1);
+        this->player2.getDeck().addCard(card2);
     }
     this->deckSplit=true;
 }
@@ -60,10 +56,7 @@ void Game::playTurn() {
     }
     while (!gameOver) {
         string stats = "";
-        if (!deckSplit) {
-            splitDeck(this->player1, this->player2);
-            deckSplit = true;
-        }
+
         Card p1_card = this->player1.getDeck().getTopCard();
         Card p2_card = this->player2.getDeck().getTopCard();
 
