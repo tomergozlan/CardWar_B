@@ -33,11 +33,8 @@ enum Value {two=2, three, four, five, six, seven, eight, nine, ten, jack, queen,
         string name();
         /// Method number 8 : Prints a string representation of the current Card
         void printCard();
-
         void setValueCard(Value value1);
         void setSuitCard(Suit suit1);
-
-
     };
 }
 #endif //CARDWAR_B_MAIN_CARD_HPP

@@ -16,21 +16,21 @@ using namespace std;
 namespace ariel{
 
 /// swap function card objects by reference using for shuffle cards.
-void Deck::swap(Card &card1, Card &card2) {
-    Card temp = card1;
-    card1 = card2;
-    card2 = temp;
-}
+    void Deck::swap(Card &card1, Card &card2) {
+        Card temp = card1;
+        card1 = card2;
+        card2 = temp;
+    }
 
 /// Creating a deck of cards consisting of 13 cards of each suit for a total of 52 (unmixed).
-Deck::Deck() {
-    vector <Card> vector_deck;
-    for (int suit = 0; suit <= 3; suit++) {
-        for (int value =2; value <= 14; value++) {
-            vector_deck.push_back(ariel::Card(ariel::Value(value), ariel::Suit(suit)));
+    Deck::Deck() {
+        vector <Card> vector_deck;
+        for (int suit = 0; suit <= 3; suit++) {
+            for (int value =2; value <= 14; value++) {
+                vector_deck.push_back(ariel::Card(ariel::Value(value), ariel::Suit(suit)));
+            }
         }
-    }
-    /// shuffle the deck.
+        /// shuffle the deck.
         auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
         std::mt19937 g(static_cast<unsigned int>(seed));
         std::shuffle(vector_deck.begin(), vector_deck.end(), g);
@@ -43,36 +43,33 @@ Deck::Deck() {
     }
 
 /// create deck from queue of card
-Deck::Deck(queue <Card> cards) {
-    this->deck = cards;
-}
+    Deck::Deck(queue <Card> cards) {
+        this->deck = cards;
+    }
 
 /// drawing a card from the top of the deck and returns its value.
-Card Deck::getTopCard() {
-    if(deck.empty()){
-        throw runtime_error("Error ! the deck is empty .");
+    Card Deck::getTopCard() {
+        Card card = this->deck.front();
+        deck.pop();
+        return card;
     }
-    Card card = this->deck.front();
-    deck.pop();
-    return card;
-}
 
 /// Return the size of the rest of the deck.
-int Deck::size() {
-    return (int) deck.size();
-}
+    int Deck::size() {
+        return (int) deck.size();
+    }
 
 /// add card to the end of the deck
-void Deck::addCard(Card card) {
-    deck.push(card);
-}
+    void Deck::addCard(Card card) {
+        deck.push(card);
+    }
 
 /// A union between two queues simulates that one of the players won the war
-void Deck::addToWinner(Deck &winning_deck) {
-    while (winning_deck.size() != 0) {
-        deck.push(winning_deck.getTopCard());
+    void Deck::addToWinner(Deck &winning_deck) {
+        while (winning_deck.size() != 0) {
+            deck.push(winning_deck.getTopCard());
+        }
     }
-}
 
 /// shuffle the deck
     void Deck::shuffle() {

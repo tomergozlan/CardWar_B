@@ -15,11 +15,11 @@ namespace ariel {
 
     class Game {
     private:
-        Player player1;
-        Player player2;
+        Player &player1;
+        Player &player2;
         stack<string> log;
         bool gameOver;
-        int round_number;
+        double round_number;
     public:
         Game(Player &player1,Player &player2); /// A constructor of the class.
         void drawSplit(Deck& deck);/// split the deck in case of draw;
@@ -29,7 +29,7 @@ namespace ariel {
         void printWiner();/// Prints the name of the winning player.
         void printLog();/// Prints all the turns played one line per turn (same format as game.printLastTurn()).
         void printStats();/// For each player prints basic statistics.
-        int getRoundNum();
+        double getRoundNum();
     };
 }
 

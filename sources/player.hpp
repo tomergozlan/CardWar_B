@@ -19,9 +19,9 @@ namespace ariel {
         std::string name;
         Deck deck;
         Deck wonCard;
-        int win_number;
-        int draw_number;
-        int lose_number;
+        double win_number;
+        double draw_number;
+        double lose_number;
     public:
         /// A constructor of the class.
         Player(std::string name);
@@ -48,11 +48,11 @@ namespace ariel {
         /// Method number 11 : set the field wonDeck
         void setWonCard(Deck newDeck);
         /// Method number 12 : get the field win_number
-        int getWinsNum();
+        double getWinsNum();
         /// Method number 13 : get the field draw_number
-        int getDrawNum();
+        double getDrawNum();
         /// Method number 14 : get the field lose_number
-        int getLoseNum();
+        double getLoseNum();
     };
 }
 
