@@ -65,16 +65,19 @@ namespace ariel{
         Deck won2 = player2.getWonCard();
         Card p1_card = deck1.getTopCard();
         Card p2_card = deck2.getTopCard();
+        Card p1_cardc = p1_card;
+        Card p2_cardc = p2_card;
         while ((p1_card.compare(p2_card)) == 0) {
             p1_card.setValueCard(ten);
             round_number++;
-            stats = player1.getName() + " played " + p1_card.name() + player2.getName() + " played " + p2_card.name() +". " + player2.getName() + " draw .";
+            stats = player1.getName() + " played " + p1_cardc.name() + player2.getName() + " played " + p2_cardc.name() + "draw";
             player1.drawIncrement();
             player2.drawIncrement();
             Deck tempDeck = Deck(queue<Card>());
             tempDeck.addCard(p1_card);
             tempDeck.addCard(p2_card);
             if (player1.stacksize() < 1 || player2.stacksize() < 1) {
+                stats += ". Split";
                 drawSplit(tempDeck);
                 player1.setDeck(deck1);
                 player2.setDeck(deck2);
@@ -87,6 +90,7 @@ namespace ariel{
             tempDeck.addCard(p1_faceDown);
             tempDeck.addCard(p2_faceDown);
             if (player1.stacksize() < 1 || player2.stacksize() < 1) {
+                stats += ". Split";
                 drawSplit(tempDeck);
                 player1.setDeck(deck1);
                 player2.setDeck(deck2);
@@ -103,7 +107,7 @@ namespace ariel{
                 player1.setWonCard(won1);
                 player1.winIncrement();
                 player2.loseIncrement();
-                stats += player1.getName() + " played " + p1_card.name() + player2.getName() + " played " +p2_card.name() + ". " + player1.getName() + " wins";
+                stats += ". "+player1.getName() + " played " + p1_card.name() + player2.getName() + " played " +p2_card.name() + ". " + player1.getName() + " wins";
                 log.push(stats);
                 player1.setDeck(deck1);
                 player2.setDeck(deck2);
@@ -114,7 +118,7 @@ namespace ariel{
                 player2.setWonCard(won2);
                 player2.winIncrement();
                 player1.loseIncrement();
-                stats += player1.getName() + " played " + p1_card.name() + player2.getName() + " played " +p2_card.name() + ". " + player2.getName() + " wins";
+                stats += ". "+player1.getName() + " played " + p1_card.name() + player2.getName() + " played " +p2_card.name() + ". " + player2.getName() + " wins";
                 log.push(stats);
                 player1.setDeck(deck1);
                 player2.setDeck(deck2);
