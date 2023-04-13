@@ -36,7 +36,7 @@ int Player::cardesTaken() {
 }
 
 ///Set the field of Deck
-void Player::setDeck(Deck newDeck) {
+void Player::setDeck(Deck& newDeck) {
     this->deck = newDeck;
 }
 

@@ -21,18 +21,17 @@ Value Card::getValue() {
     return this->value;
 }
 /// Return the string of enum that representation the card suit
-string Card::getSuitName (Suit card_suit) {
-    switch(card_suit) {
+string Card::getSuitName () {
+    switch(this->suit) {
         case clubs: return "Clubs";
         case diamonds: return "Diamonds";
         case hearts: return "Hearts";
         case spades: return "Spades";
-        default: throw std::out_of_range("Suit value out of range");
     }
 }
 /// Return the string of enum representation the card value
-string Card::getValueName (Value card_value) {
-    switch(card_value) {
+string Card::getValueName () {
+    switch(this->value) {
         case two: return "2";
         case three: return "3";
         case four: return "4";
@@ -50,25 +49,26 @@ string Card::getValueName (Value card_value) {
     }
 }
 /// Function that takes another Card object as a parameter and compares it to the current Card object
-int Card::compare(Card &other){
+int Card::compare(Card other){
     if(this->value == 2 && other.value == 14) return 1;
     if(this->value == 14 && other.value == 2) return -1;
     if(this->value < other.value) return -1;
-    else if (this->value > other.value) return 1;
+    if(this->value > other.value) return 1;
     else return 0 ;
 }
 /// Returns a string representation of the current Card.
 string Card::name() {
-    return this->getValueName(this->getValue()) + " of " + this->getSuitName(this->getSuit())+ " ";
+    return this->getValueName() + " of " + this->getSuitName()+ " ";
 }
 /// Prints a string representation of the current Card
 void Card::printCard(){
     std::cout<<this->name();
 }
-    void Card::setValueCard(Value value1){
-        value=value1;
+void Card::setValueCard(Value value1){
+        this->value=value1;
     }
+
     void Card::setSuitCard(Suit suit1){
-        suit=suit1;
+        this->suit=suit1;
     }
 }

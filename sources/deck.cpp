@@ -49,8 +49,8 @@ Deck::Deck(queue <Card> cards) {
 
 /// drawing a card from the top of the deck and returns its value.
 Card Deck::getTopCard() {
-    if(this->deck.empty()) {
-        throw runtime_error("Error ! The queue is empty");
+    if(deck.empty()){
+        throw runtime_error("Error ! the deck is empty .");
     }
     Card card = this->deck.front();
     deck.pop();

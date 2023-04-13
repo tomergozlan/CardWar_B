@@ -34,7 +34,7 @@ namespace ariel {
         /// Method number 4 : Overloaded operator function for the equality operator ==.
         bool operator==(Player& other);
         /// Method number 5 : Set the field of Deck
-        void setDeck(Deck newDeck);
+        void setDeck(Deck &newDeck);
         /// Method number 6 : get the field Deck
         Deck getDeck();
         /// Method number 7 : Win increment

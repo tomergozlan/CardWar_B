@@ -19,11 +19,9 @@ namespace ariel {
         Player player2;
         stack<string> log;
         bool gameOver;
-        bool deckSplit;
         int round_number;
     public:
-        Game(Player player1,Player player2); /// A constructor of the class.
-        void splitDeck(Deck& deck); /// Split the deck of 2 players - 26 to each
+        Game(Player &player1,Player &player2); /// A constructor of the class.
         void drawSplit(Deck& deck);/// split the deck in case of draw;
         void playTurn();/// Simulates a single turn in the game.
         void printLastTurn();/// Print the last turn stats.
