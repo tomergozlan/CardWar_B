@@ -39,6 +39,8 @@ namespace ariel {
         void shuffle();
         /// Method number 9 : Reset deck of player
         void resetDeck();
+        /// Method number 10 : Print deck of player for check new demo
+        void printDeck();
     };
 }
 #endif //CARDWAR_B_MAIN_DECK_HPP

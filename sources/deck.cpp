@@ -13,7 +13,7 @@
 #include <algorithm>
 #include <random>
 using namespace std;
-namespace ariel{
+namespace ariel {
 
 /// swap function card objects by reference using for shuffle cards.
     void Deck::swap(Card &card1, Card &card2) {
@@ -26,7 +26,7 @@ namespace ariel{
     Deck::Deck() {
         vector <Card> vector_deck;
         for (int suit = 0; suit <= 3; suit++) {
-            for (int value =2; value <= 14; value++) {
+            for (int value = 2; value <= 14; value++) {
                 vector_deck.push_back(ariel::Card(ariel::Value(value), ariel::Suit(suit)));
             }
         }
@@ -84,9 +84,32 @@ namespace ariel{
             deck.push(card);
         }
     }
+
 /// Reset deck of player
     void Deck::resetDeck() {
-        queue<Card> empty_queue;
+        queue <Card> empty_queue;
         std::swap(empty_queue, deck);
+    }
+
+    void Deck::printDeck() {
+        queue <Card> tempDeck = deck;
+        bool isLastCard = false;
+        while (!tempDeck.empty()) {
+            Card currentCard = tempDeck.front();
+            currentCard.printCard();
+            if (tempDeck.size() == 1) {
+                isLastCard = true;
+            }
+            tempDeck.pop();
+            if (!isLastCard) {
+                cout << ",";
+            }
+        }
+        if (isLastCard) {
+            cout << ".";
+
+            cout << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+        }
     }
 }
