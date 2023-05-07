@@ -1,4 +1,14 @@
-/// Created by Tomer Gozlan on 24/03/2023.
+/**
+* @file player.hpp
+* @brief Contains the definition of the Player class.
+*
+* This file contains the declaration of the Player class and its member functions.
+* The Player class represents a player in a card game, and has a name, a deck of cards, and
+* statistics on the number of wins, draws, and losses.
+*
+* @author Tomer Gozlan
+* @date 24/03/2023
+*/
 
 #ifndef CARDWAR_B_MAIN_PLAYER_HPP
 #define CARDWAR_B_MAIN_PLAYER_HPP
@@ -9,51 +19,49 @@
 #include "deck.hpp"
 
 using namespace std;
-
-/// By placing these classes within the ariel namespace, the code ensures that they will have
-/// unique names and that they will not conflict with other code that uses the same names.
-
 namespace ariel {
+
     class Player {
+
     private:
+
         std::string name;
         Deck deck;
         Deck wonCard;
         double win_number;
         double draw_number;
         double lose_number;
+
     public:
-        /// A constructor of the class.
         Player(std::string name);
-        /// Method number 1 : Returns the number of cards the player currently has in their hand.
+
         int stacksize();
-        /// Method number 2 : Returns the total number of cards that the player has taken so far.
+
         int cardesTaken();
-        /// Method number 3 : Returns the name of the player.
-        string getName() ;
-        /// Method number 4 : Overloaded operator function for the equality operator ==.
-        bool operator==(Player& other);
-        /// Method number 5 : Set the field of Deck
+
+        string getName();
+
+        bool operator==(Player &other);
+
         void setDeck(Deck &newDeck);
-        /// Method number 6 : get the field Deck
+
         Deck getDeck();
-        /// Method number 7 : Win increment
+
         void winIncrement();
-        /// Method number 8 : Draw increment
+
         void drawIncrement();
-        /// Method number 9 : lose increment
+
         void loseIncrement();
-        /// Method number 10 : get the field wonDeck
+
         Deck getWonCard();
-        /// Method number 11 : set the field wonDeck
+
         void setWonCard(Deck newDeck);
-        /// Method number 12 : get the field win_number
+
         double getWinsNum();
-        /// Method number 13 : get the field draw_number
+
         double getDrawNum();
-        /// Method number 14 : get the field lose_number
+
         double getLoseNum();
     };
 }
-
 #endif //CARDWAR_B_MAIN_PLAYER_HPP

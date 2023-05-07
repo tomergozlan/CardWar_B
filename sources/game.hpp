@@ -1,4 +1,14 @@
-/// Created by Tomer Gozlan on 3/24/23.
+/**
+* @file main_game.hpp
+* @brief Declaration of the Game class.
+*
+* This file contains the declaration of the Game class, which represents the game logic for a card game.
+* The Game class uses Player and Deck classes to implement the game rules and simulate turns.
+* The class also provides methods for printing game stats and logging game actions.
+*
+* @author Tomer Gozlan
+* @date 24/03/2023
+*/
 
 #ifndef CARDWAR_B_MAIN_GAME_HPP
 #define CARDWAR_B_MAIN_GAME_HPP
@@ -21,14 +31,14 @@ namespace ariel {
         bool gameOver;
         double round_number;
     public:
-        Game(Player &player1,Player &player2); /// A constructor of the class.
-        void drawSplit(Deck& deck);/// split the deck in case of draw;
-        void playTurn();/// Simulates a single turn in the game.
-        void printLastTurn();/// Print the last turn stats.
-        void playAll();/// Playes the game untill the end.
-        void printWiner();/// Prints the name of the winning player.
-        void printLog();/// Prints all the turns played one line per turn (same format as game.printLastTurn()).
-        void printStats();/// For each player prints basic statistics.
+        Game(Player &player1,Player &player2);
+        void drawSplit(Deck& deck);
+        void playTurn();
+        void printLastTurn();
+        void playAll();
+        void printWiner();
+        void printLog();
+        void printStats();
         double getRoundNum();
     };
 }

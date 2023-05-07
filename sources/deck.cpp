@@ -1,4 +1,15 @@
-/// Created by Tomer Gozlan on 04/04/2023.
+/**
+ * @file deck.cpp
+ * @brief Implementation of the Deck class.
+ *
+ * This file contains the implementation of the Deck class, which represents a deck of cards in a card game.
+ * The Deck class is implemented using a queue data structure to store the cards in the deck.
+ * The methods are implemented in a way that simulates a card game, where players draw cards from the deck, play them, and win or lose rounds.
+ * The Deck class is an essential part of the card game and is used by other classes to implement the game's logic.
+ *
+ * @author Tomer Gozlan
+ * @date 04/04/2023
+ */
 
 #include <string>
 #include <iostream>
@@ -9,17 +20,17 @@
 #include <chrono>
 #include <algorithm>
 #include <random>
+
 using namespace std;
 namespace ariel {
 
-/// swap function card objects by reference using for shuffle cards.
-    void Deck::swap(Card &card1, Card &card2) {
-        Card temp = card1;
-        card1 = card2;
-        card2 = temp;
-    }
-
-/// Creating a deck of cards consisting of 13 cards of each suit for a total of 52 (unmixed).
+/**
+@brief Constructor for the Deck class.
+This constructor creates a standard 52-card deck, with each card having a unique combination of
+value and suit. The deck is then shuffled using a random seed based on the current time, and stored
+in a queue data structure.
+@return A new Deck object.
+*/
     Deck::Deck() {
         vector <Card> vector_deck;
         for (int suit = 0; suit <= 3; suit++) {
@@ -39,36 +50,57 @@ namespace ariel {
         }
     }
 
-/// create deck from queue of card
+/**
+@brief Constructs a Deck object from a queue of cards.
+This constructor creates a new Deck object with the given queue of cards.
+@param cards The queue of cards to be used in the deck.
+*/
     Deck::Deck(queue <Card> cards) {
         this->deck = cards;
     }
 
-/// drawing a card from the top of the deck and returns its value.
+/**
+@brief Get the top card from the deck.
+This method retrieves the top card from the deck, which is the card at the front of the queue.
+It then removes that card from the queue by popping it.
+@return The top card of the deck.
+*/
     Card Deck::getTopCard() {
         Card card = this->deck.front();
         deck.pop();
         return card;
     }
 
-/// Return the size of the rest of the deck.
+/**
+@brief Get the number of cards in the deck.
+@return The number of cards in the deck.
+*/
     int Deck::size() {
         return (int) deck.size();
     }
 
-/// add card to the end of the deck
+/**
+@brief Adds a card to the bottom of the deck.
+@param card The card to be added.
+*/
     void Deck::addCard(Card card) {
         deck.push(card);
     }
 
-/// A union between two queues simulates that one of the players won the war
+/**
+* @brief Adds all cards from the `winning_deck` to the bottom of the winner deck, simulating a win in battle.
+* @param winning_deck The deck of cards to add to the bottom of this deck.
+*/
     void Deck::addToWinner(Deck &winning_deck) {
         while (winning_deck.size() != 0) {
             deck.push(winning_deck.getTopCard());
         }
     }
 
-/// shuffle the deck
+/**
+@brief Shuffles the deck of cards by converting it to a vector, shuffling the vector, and then converting it back to a queue.
+@note This method modifies the deck of cards.
+*/
     void Deck::shuffle() {
         vector <Card> queue_to_vector;
         while (!this->deck.empty()) {
@@ -82,31 +114,37 @@ namespace ariel {
         }
     }
 
-/// Reset deck of player
+/**
+@brief Reset the deck of the player.
+This method resets the deck of the player by creating an empty queue and swapping it with the current deck.
+*/
     void Deck::resetDeck() {
         queue <Card> empty_queue;
         std::swap(empty_queue, deck);
     }
 
+/**
+@brief Prints the cards in the deck.
+This function prints the cards in the deck, with four cards per row separated by tabs.
+*/
     void Deck::printDeck() {
         queue <Card> tempDeck = deck;
-        bool isLastCard = false;
+        int counter = 1;
         while (!tempDeck.empty()) {
             Card currentCard = tempDeck.front();
             currentCard.printCard();
-            if (tempDeck.size() == 1) {
-                isLastCard = true;
-            }
             tempDeck.pop();
-            if (!isLastCard) {
-                cout << ",";
+            if (!tempDeck.empty()) {
+                cout << "\t" << "\t";
             }
+            if (counter % 4 == 0) {
+                cout << endl;
+            }
+            counter++;
         }
-        if (isLastCard) {
-            cout << ".";
-
-            cout << endl;
-            cout << "--------------------------------------------------------------------------------" << endl;
-        }
+        cout << "." << endl;
+        cout
+                << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+                << endl;
     }
 }
