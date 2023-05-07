@@ -2,10 +2,7 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib.h>
-#include <stdexcept>
 #include <queue>
-#include <vector>
 #include <ctime>
 #include "card.hpp"
 #include "deck.hpp"

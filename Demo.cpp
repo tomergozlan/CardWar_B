@@ -185,5 +185,6 @@ cout<<"-----------------------------------------"<<endl;
     cout<<"Print the number of rounds: "<<game.getRoundNum()<<endl;
     cout<<"Print the winner name: "<<endl;
     game.printWiner();
+    cout<<"Check the draw split method: "
 }
 
